@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenho algo pra te dizer ❤️</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: #ffe6f0;
+        overflow: hidden;
+    }
+    .hearts {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    .heart {
+        position: absolute;
+        color: #ff3366;
+        font-size: 24px;
+        animation: float 6s infinite ease-in-out;
+    }
+    @keyframes float {
+        0% { transform: translateY(100vh) scale(0.8); opacity: 0.8; }
+        50% { opacity: 1; }
+        100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .letter {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        text-align: center;
+        width: 320px;
+        cursor: pointer;
+        transition: transform 0.4s;
+        animation: pulse 1.5s infinite;
+    }
+    .letter:hover {
+        transform: scale(1.05);
+    }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    .hidden {
+        display: none;
+    }
+    h1 {
+        color: #ff3366;
+        font-size: 28px;
+    }
+    .buttons {
+        margin-top: 20px;
+    }
+    .btn {
+        background: #ff3366;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.3s;
+    }
+    .btn:hover {
+        background: #ff6699;
+        transform: scale(1.1);
+    }
+    .animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 230, 240, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        color: #ff3366;
+        animation: fadeIn 1s ease forwards;
+        z-index: 10;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .big-heart {
+        font-size: 100px;
+        animation: pop 1.5s ease forwards;
+    }
+    @keyframes pop {
+        0% { transform: scale(0); opacity: 0; }
+        50% { transform: scale(1.3); opacity: 1; }
+        100% { transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+<div class="container">
+    <div class="letter" id="letter">
+        <h2>Clique aqui, tenho algo pra te dizer ❤️</h2>
+    </div>
+    <div class="hidden" id="message">
+        <h1>Quer namorar comigo? ❤️</h1>
+        <div class="buttons">
+            <button class="btn" onclick="showAnimation('Sabia que você ia dizer sim! ❤️')">Sim ❤️</button>
+            <button class="btn" onclick="showAnimation('Eu também te amo! 😍')">Claro 😍</button>
+        </div>
+    </div>
+</div>
+<script>
+    const letter = document.getElementById('letter');
+    const message = document.getElementById('message');
+
+    letter.addEventListener('click', () => {
+        letter.style.display = 'none';
+        message.classList.remove('hidden');
+    });
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.getElementById('hearts').appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 300);
+
+    function showAnimation(text) {
+        const overlay = document.createElement('div');
+        overlay.classList.add('animation');
+        overlay.innerHTML = `<div><div class="big-heart">❤️</div><p>${text}</p></div>`;
+        document.body.appendChild(overlay);
+        setTimeout(() => {
+            overlay.remove();
+        }, 4000);
+    }
+</script>
+</body>
+</html>
